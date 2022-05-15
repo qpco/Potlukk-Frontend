@@ -34,6 +34,10 @@ export default function UserRegistrationPage(){
         if(response.status === 200){
             const body = await response.json();
             alert(`New user registered with id of ${body.id}`)
+            // Added session storage for registered user and they are then taken to the potlukks page
+            sessionStorage.setItem("user", JSON.stringify(userInfo)); // store user in session storage
+            console.log(userInfo)
+            navigate("/potlukks") // Take person to the potlukk page.
         }else{
             alert("FAILED TO CREATE A USER")
         }
