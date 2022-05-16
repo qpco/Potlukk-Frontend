@@ -2,6 +2,16 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ItemDisplayTable from "./ItemDisplayTable"
 
+function convertEpochToDate(epoch) {
+    const date = new Date(epoch*1000)
+    return date.toLocaleDateString()
+}
+
+function convertEpochToTime(epoch) {
+    const date = new Date(epoch*1000)
+    return date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
+}
+
 export default function PotlukkHomePage(){
 
     const [potlukks, setPotlukks] = useState([])
@@ -27,7 +37,10 @@ export default function PotlukkHomePage(){
             <>
             <tr key={p.id}>
                 <td>{p.name}</td>
-                <td>{p.epochTime}</td>
+                <td><div>
+                    <p id="date">{convertEpochToDate(p.epochTime)}</p>
+                    <p id="time">{convertEpochToTime(p.epochTime)}</p>
+                    </div></td>
                 <td><ButtonAction hostID={p.hostID} /></td>
             </tr>
             <tr id="action-row">
@@ -56,9 +69,9 @@ export default function PotlukkHomePage(){
             }
         }
         if(user.uId === btn.hostID) {
-            return(<button onClick={() => action(true, btn.hostID)}>edit</button>)
+            return(<button class="action-btn" onClick={() => action(true, btn.hostID)}>edit</button>)
         } else {
-            return(<button onClick={() => action(false, btn.hostID)}>attend</button>)
+            return(<button class="action-btn" onClick={() => action(false, btn.hostID)}>attend</button>)
         }
     }
 

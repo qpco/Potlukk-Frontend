@@ -46,3 +46,15 @@ body {
 #create-new-potlukk-btn{
     opacity: .7;
 }
+p{
+    margin: 0;
+}
+#time{
+    font-size: 1.25rem;
+}
+#date {
+    font-size: 1.5rem;
+}
+.action-btn {
+    font-size: large;
+}
