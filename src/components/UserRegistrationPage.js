@@ -32,8 +32,8 @@ export default function UserRegistrationPage(){
         });
 
         if(response.status === 200){
-            const body = await response.json();
-            alert(`New user registered with id of ${body.id}`)
+            const userInfo = await response.json();
+            alert(`New user registered with id of ${userInfo.id}`)
             // Added session storage for registered user and they are then taken to the potlukks page
             sessionStorage.setItem("user", JSON.stringify(userInfo)); // store user in session storage
             console.log(userInfo)
