@@ -80,6 +80,7 @@ export default function UserLoginPage(){
     }
 
     function navigatePotlukksPageAsGuest(){
+        sessionStorage.setItem("user", JSON.stringify({uId:-1,username:'guest'}))
         navigate("/potlukks")
     }
 
