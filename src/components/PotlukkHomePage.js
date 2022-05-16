@@ -4,6 +4,16 @@ import ItemDisplayTable from "./ItemDisplayTable"
 
 export default function PotlukkHomePage(){
 
+    function convertEpochToDate(epoch) {
+        const date = new Date(epoch*1000)
+        return date.toLocaleDateString()
+    }
+    
+    function convertEpochToTime(epoch) {
+        const date = new Date(epoch*1000)
+        return date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
+    }
+
     const [potlukks, setPotlukks] = useState([])
     const [showEdit, setShowEdit] = useState({id:0, show:false})
     const [showAttend, setShowAttend] = useState({id:0, show:false})
@@ -27,7 +37,10 @@ export default function PotlukkHomePage(){
             <>
             <tr key={p.id}>
                 <td>{p.name}</td>
-                <td>{p.epochTime}</td>
+                <td><div id="date-time-block">
+                    <p id="date">{convertEpochToDate(p.epochTime)}</p>
+                    <p id="time">{convertEpochToTime(p.epochTime)}</p>
+                </div></td>
                 <td><ButtonAction hostID={p.hostID} /></td>
             </tr>
             <tr id="action-row">
@@ -56,9 +69,9 @@ export default function PotlukkHomePage(){
             }
         }
         if(user.uId === btn.hostID) {
-            return(<button onClick={() => action(true, btn.hostID)}>edit</button>)
+            return(<button class="action-btn" onClick={() => action(true, btn.hostID)}>edit</button>)
         } else {
-            return(<button onClick={() => action(false, btn.hostID)}>attend</button>)
+            return(<button class="action-btn" onClick={() => action(false, btn.hostID)}>attend</button>)
         }
     }
 
@@ -92,7 +105,7 @@ export default function PotlukkHomePage(){
             <thead>
             <tr>
                 <th>Name</th>
-                <th>Date</th>
+                <th>Time</th>
                 <th></th>
             </tr>
             </thead>
